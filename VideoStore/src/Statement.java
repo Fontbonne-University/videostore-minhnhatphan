@@ -1,14 +1,14 @@
 import java.util.List;
 import java.util.ArrayList;
 
-public class Customer 
+public class Statement 
 {
-	private String name;
+	private String customerName;
 	private List<Rental> rentals = new ArrayList<Rental>();
 	private double totalAmount;
 	private int	frequentRenterPoints;
-	public Customer(String name){
-		this.name = name;
+	public Statement(String customerName){
+		this.customerName = customerName;
 	}
 	
 	public void addRental(Rental rental) {
@@ -16,10 +16,10 @@ public class Customer
 	}
 	
 	public String getName() {
-		return name;
+		return customerName;
 	}
 	
-	public String generateStatement() {
+	public String generate() {
 		clearTotal();
 		String statementText = header();
 		statementText += rentalLines();
@@ -33,7 +33,7 @@ public class Customer
 	}
 
 	private String header() {
-		return String.format("Rental Record for %s\n", name);
+		return String.format("Rental Record for %s\n", customerName);
 	}
 	
 	private String rentalLines() {
@@ -58,5 +58,13 @@ public class Customer
 
 	private String formatRentalLine(Rental rental, double thisAmount) {
 		return String.format("\t%s\t%.1f\n", rental.getMovieTitle(),thisAmount);
+	}
+
+	public double getTotal() {
+		return totalAmount;
+	}
+
+	public int getfrequentRenterPoints() {
+		return frequentRenterPoints;
 	}
 }
